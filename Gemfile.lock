@@ -110,7 +110,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.13.0)
+    devise-i18n (1.14.0)
       devise (>= 4.9.0)
       rails-i18n
     dotenv (3.1.8)
@@ -278,7 +278,7 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.3.0)
-    rdoc (6.14.0)
+    rdoc (6.14.1)
       erb
       psych (>= 4.0.0)
     regexp_parser (2.10.0)
@@ -414,7 +414,7 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.9)
-  devise-i18n (~> 1.13)
+  devise-i18n (~> 1.14)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
