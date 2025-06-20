@@ -1,0 +1,9 @@
+<h1><%= @product.nome %></h1>
+<p>Variante: <%= @product.variante %></p>
+
+<% if @product.imagem.attached? %>
+  <%= image_tag @product.imagem.variant(resize_to_limit: [300, 300]) %>
+<% end %>
+
+<%= link_to "Excluir Produto", store_product_path(@store, @product), method: :delete %>
+<%= link_to "Voltar para loja", store_path(@store) %>

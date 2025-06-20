@@ -1,0 +1,52 @@
+<!-- filepath: app/views/home/index.html.erb -->
+<div class="min-h-screen bg-gray-100 flex flex-col">
+  <!-- Header azul 100% largura, colado no topo -->
+  <header class="w-full bg-[#1982C4]/90 m-0 p-0">
+    <div class="flex justify-between items-center px-8 py-4 w-full">
+      <div>
+        <%= image_tag "logo_reduced.png", alt: "Logo Reduced", class: "w-25 h-25 object-contain" %>
+      </div>
+      <div class="flex gap-4">
+        <% if user_signed_in? %>
+          <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "inline-block bg-gray-200 text-gray-800 px-5 py-2 rounded shadow font-semibold hover:bg-gray-400 transition no-underline" %>
+        <% else %>
+          <%= link_to "Entrar", new_user_session_path, class: "inline-block bg-gray-200 text-gray-800 px-5 py-2 rounded shadow font-semibold hover:bg-gray-400 transition no-underline" %>
+          <%= link_to "Cadastre-se", new_user_registration_path, class: "inline-block bg-gray-200 text-gray-800 px-5 py-2 rounded shadow font-semibold hover:bg-gray-400 transition no-underline" %>
+        <% end %>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal centralizado -->
+  <main class="flex-grow flex items-center justify-center">
+    <% if user_signed_in? %>
+      <div class="bg-white w-full max-w-xl mx-4 p-8 shadow-lg rounded-lg flex flex-col items-center">
+        <div class="flex justify-center mb-8">
+          <%= image_tag "logo_full.png", alt: "Logo Full", class: "w-120 h-60 object-contain" %>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-800 mb-4 text-center">Bem-vindo, <%= current_user.email %>!</h1>
+        <% if current_user.store.present? %>
+          <p class="text-lg text-gray-700 mb-4 text-center">
+            Sua loja: <span class="font-semibold text-primary"><%= current_user.store.nome %></span>
+          </p>
+          <%= link_to "Ver minha loja", store_path(current_user.store), class: "inline-block bg-gray-100 text-black px-5 py-2 rounded shadow font-semibold hover:bg-[#156fa1] transition no-underline mb-2 border border-black/20" %>
+        <% else %>
+          <p class="text-lg text-gray-700 mb-4 text-center">
+            Você ainda não possui uma loja.
+          </p>
+          <%= link_to "Criar minha loja", new_store_path, class: "inline-block bg-green-600/75 text-white px-5 py-2 rounded shadow font-semibold hover:bg-green-600 transition no-underline mb-2" %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="bg-white w-full max-w-dvh mx-4 p-8 shadow-lg rounded-lg">
+        <div class="flex justify-center mb-8">
+          <%= image_tag "logo_full.png", alt: "Logo Full", class: "w-160 h-80 object-contain " %>
+        </div>
+        <h1 class="text-4xl font-bold text-gray-800 mb-6 text-center">Bem-vindo à StoreApp</h1>
+        <p class="text-gray-700 text-lg text-center">
+          Crie sua loja e comece a vender agora mesmo! Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+      </div>
+    <% end %>
+  </main>
+</div>

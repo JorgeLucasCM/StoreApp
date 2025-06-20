@@ -1,0 +1,18 @@
+<h1>Produtos da loja <%= @store.nome %></h1>
+
+<% if user_signed_in? && current_user == @store.user %>
+  <%= link_to "Criar novo produto", new_store_product_path(@store) %>
+<% end %>
+
+<ul>
+  <% @products.each do |product| %>
+    <li>
+      <%= link_to product.nome, store_product_path(@store, product) %>
+      <% if product.imagem.attached? %>
+        <br><%= image_tag product.imagem.variant(resize_to_limit: [150, 150]) %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Voltar para minha loja", store_path(@store) %>

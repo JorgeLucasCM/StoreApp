@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%# <link rel="shortcut icon" href="/assets/images/logo_reduced.png"/> %>
+    
+    <title><%= content_for(:title) || "Store App" %></title>
+    <%= favicon_link_tag 'logo_icon.png', type:'image/png' %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    
+
+    <!-- Estilos -->
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <!-- Scripts -->
+    <%= javascript_importmap_tags %>
+  </head>
+
+
+    <!-- Conteúdo principal -->
+    <main class="">
+      <%= yield %>
+    </main>
+  </body>
+</html>

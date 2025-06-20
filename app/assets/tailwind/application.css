@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {@layer base {
+
+}
+    --color-primary: #1982C4; /* Azul médio */
+    --color-success: #4CAF50; /* Verde suave */
+    --color-highlight: #FF8C00; /* Laranja vibrante */
+    --color-lightGray: #F0F0F0; /* Cinza claro */
+    --color-borderGray: #CCCCCC; /* Cinza para bordas */
+  }
+  
+}

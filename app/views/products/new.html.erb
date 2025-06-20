@@ -1,0 +1,97 @@
+<!-- filepath: /home/jlcm/RubyOnRails/StoreApp/app/views/products/new.html.erb -->
+<div class="min-h-screen w-full flex flex-col bg-white">
+  <!-- Header azul -->
+  <header class="w-full bg-[#1982C4] m-0 p-0">
+    <div class="flex justify-between items-center px-8 py-4 w-full relative">
+      <!-- Botão Voltar à esquerda -->
+      <div class="absolute left-0 pl-8">
+        <%= link_to "← Voltar", store_path(@store), class: "inline-block bg-gray-200 text-gray-800 px-4 py-2 rounded shadow font-semibold hover:bg-gray-400 transition no-underline" %>
+      </div>
+      <!-- Logo centralizada -->
+      <div class="mx-auto flex justify-center">
+        <%= image_tag "logo_reduced.png", alt: "Logo", class: "h-25 w-25 object-contain" %>
+      </div>
+      <!-- Botão sair à direita -->
+      <div class="absolute right-0 pr-8">
+        <% if user_signed_in? %>
+          <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "inline-block bg-gray-200 text-gray-800 px-4 py-2 rounded shadow font-semibold hover:bg-gray-400 transition no-underline" %>
+        <% end %>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal centralizado -->
+  <main class="flex-grow flex items-center justify-center">
+    <div class="flex flex-col items-center justify-center bg-gray-200/90 rounded-3xl p-12 w-full max-w-md shadow-lg border border-black/20">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Novo Produto para <%= @store.nome %></h2>
+
+      <% if @product.errors.any? %>
+        <div class="mb-4 w-full bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded">
+          <h3 class="font-bold mb-2"><%= pluralize(@product.errors.count, "erro") %> proibiu este produto de ser salvo:</h3>
+          <ul class="list-disc list-inside">
+            <% @product.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= form_with model: [@store, @product], local: true, html: { multipart: true }, class: "w-full" do |f| %>
+        <div class="mb-4">
+          <%= f.label :nome, class: "block text-gray-700 font-semibold mb-1" %>
+          <%= f.text_field :nome, class: "w-full px-4 py-2 rounded bg-white text-gray-800 focus:outline-none border border-black/25" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :preco, class: "block text-gray-700 font-semibold mb-1" %>
+          <%= f.number_field :preco, step: 0.01, class: "w-full px-4 py-2 rounded bg-white text-gray-800 focus:outline-none border border-black/25" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :imagem, "Imagem do Produto", class: "block text-gray-700 font-semibold mb-1" %>
+          <div class="flex flex-col items-center gap-2">
+            <%= image_tag 'product-placeholder.jpg', id: "preview-img", class: "w-32 h-32 object-contain rounded border border-black/20 bg-white", alt: "Preview da imagem" %>
+            <%= f.file_field :imagem, accept: "image/*", class: "hidden", id: "imagem-input" %>
+            <span id="file-name" class="text-gray-700 text-sm mt-1"></span>
+            <label for="imagem-input" class="cursor-pointer bg-white text-black px-4 py-2 rounded shadow font-semibold hover:bg-[#156fa1]/70 transition no-underline border border-black/20">
+              Escolher imagem
+            </label>
+            
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <%= f.label :variantes, class: "block text-gray-700 font-semibold mb-1" %>
+          <%= f.text_field :variantes, class: "w-full px-4 py-2 rounded bg-white text-gray-800 focus:outline-none border border-black/25" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.submit "Criar Produto", class: "w-full bg-green-600/80 text-white px-4 py-2 rounded shadow font-semibold hover:bg-green-600 transition no-underline border border-black/20" %>
+        </div>
+      <% end %>
+    </div>
+  </main>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("imagem-input");
+    const preview = document.getElementById("preview-img");
+    const fileName = document.getElementById("file-name");
+    const originalSrc = preview.src; // Salva a imagem original
+
+    input.addEventListener("change", function(event) {
+      const [file] = input.files;
+      if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = e => preview.src = e.target.result;
+        reader.readAsDataURL(file);
+        fileName.textContent = file.name;
+      } else {
+        // Se cancelar ou limpar, volta para a imagem original
+        preview.src = originalSrc;
+        fileName.textContent = "";
+      }
+    });
+  });
+</script>

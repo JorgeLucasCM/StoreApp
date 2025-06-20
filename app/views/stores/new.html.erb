@@ -1,0 +1,52 @@
+<!-- filepath: /home/jlcm/RubyOnRails/StoreApp/app/views/stores/new.html.erb -->
+<div class="min-h-screen w-full flex flex-col bg-white">
+  <!-- Header azul -->
+  <header class="w-full bg-[#1982C4] m-0 p-0">
+    <div class="flex justify-between items-center px-8 py-4 w-full relative">
+      <!-- Botão Voltar à esquerda -->
+      <div class="absolute left-0 pl-8">
+        <%= link_to "← Voltar", root_path, class: "inline-block bg-gray-200 text-gray-800 px-4 py-2 rounded shadow font-semibold hover:bg-gray-400 transition no-underline" %>
+      </div>
+      <!-- Logo centralizada -->
+      <div class="mx-auto flex justify-center">
+        <%= image_tag "logo_reduced.png", alt: "Logo", class: "h-25 w-25 object-contain" %>
+      </div>
+      <!-- Espaço à direita para alinhamento -->
+      <div class="absolute right-0 pr-8"></div>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal centralizado -->
+  <main class="flex-grow flex items-center justify-center">
+    <div class="flex flex-col items-center justify-center bg-gray-200/90 rounded-3xl p-12 w-full max-w-md shadow-lg border border-black/20">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Criar nova loja</h2>
+
+      <%= form_with model: @store, local: true, class: "w-full" do |f| %>
+        <div class="mb-4">
+          <%= f.label :nome, "Nome da Loja", class: "block text-gray-700 font-semibold mb-1" %>
+          <%= f.text_field :nome, class: "w-full px-4 py-2 rounded bg-white text-gray-800 focus:outline-none border border-black/25" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :slug, "URL amigável", class: "block text-gray-700 font-semibold mb-1" %>
+          <%= f.text_field :slug, class: "w-full px-4 py-2 rounded bg-white text-gray-800 focus:outline-none border border-black/25" %>
+          <p class="text-xs text-gray-500 mt-1">Ex: minha-loja, loja-do-joao</p>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :slogan, class: "block text-gray-700 font-semibold mb-1" %>
+          <%= f.text_field :slogan, class: "w-full px-4 py-2 rounded bg-white text-gray-800 focus:outline-none border border-black/25" %>
+        </div>
+
+        <div class="mb-6">
+          <%= f.label :descricao, class: "block text-gray-700 font-semibold mb-1" %>
+          <%= f.text_area :descricao, rows: 3, class: "w-full px-4 py-2 rounded bg-white text-gray-800 focus:outline-none border border-black/25 resize-none" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.submit "Criar Loja", class: "w-full bg-green-600/80 text-white px-4 py-2 rounded shadow font-semibold hover:bg-green-600 transition no-underline border border-black/20" %>
+        </div>
+      <% end %>
+    </div>
+  </main>
+</div>
