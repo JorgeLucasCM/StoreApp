@@ -71,4 +71,4 @@ gem "devise-i18n", "~> 1.13"
 
 gem "tailwindcss-ruby", "~> 4.1"
 
-gem "tailwindcss-rails", "~> 4.2"
+gem "tailwindcss-rails", "~> 4.3"
